@@ -1,12 +1,15 @@
 package com.store.domain;
 
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Index;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -19,6 +22,10 @@ import org.hibernate.annotations.Type;
 		@Index(columnList = "purchase_date", name = "purchase_date_index", unique = false)
 		})
 public class Invoice {
+	
+	@OneToMany
+	@JoinColumn(name = "invoice_id")
+	private List<InvoiceProducts> products;
 	
 	@Id
 	@Type(type="org.hibernate.type.PostgresUUIDType")
