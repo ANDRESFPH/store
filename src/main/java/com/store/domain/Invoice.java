@@ -23,6 +23,10 @@ import org.hibernate.annotations.Type;
 		})
 public class Invoice {
 	
+	public Invoice() {
+		this.id = UUID.randomUUID();
+	}
+	
 	@OneToMany
 	@JoinColumn(name = "invoice_id")
 	private List<InvoiceProducts> products;

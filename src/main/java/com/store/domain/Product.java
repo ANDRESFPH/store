@@ -11,6 +11,10 @@ import org.hibernate.annotations.Type;
 @Entity
 public class Product {
 	
+	public Product() {
+		this.id = UUID.randomUUID();
+	}
+	
 	@Id
 	@Type(type="org.hibernate.type.PostgresUUIDType")
 	private UUID id;
