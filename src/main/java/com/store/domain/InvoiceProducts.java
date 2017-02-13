@@ -18,8 +18,12 @@ import org.hibernate.annotations.Type;
 		})
 public class InvoiceProducts {
 	
+	public InvoiceProducts() {
+		this.id = UUID.randomUUID();
+	}
+	
 	@ManyToOne
-	@JoinColumn(name = "id")
+	@JoinColumn(name = "id", insertable = false, updatable = false)
 	private Product product;
 	
 	@Id
@@ -32,11 +36,11 @@ public class InvoiceProducts {
 	@Column(name = "product_price")
 	private double productPrice;
 	
-	@Column(name = "invoice_id")
-	private UUID invoiceId;
-	
 	@Column(name = "product_amount")
 	private int productAmount;
+	
+	@Column(name = "invoice_id")
+	private UUID invoiceId;
 
 	public UUID getId() {
 		return id;
@@ -62,14 +66,6 @@ public class InvoiceProducts {
 		this.productPrice = productPrice;
 	}
 
-	public UUID getInvoiceId() {
-		return invoiceId;
-	}
-
-	public void setInvoiceId(UUID invoiceId) {
-		this.invoiceId = invoiceId;
-	}
-
 	public int getProductAmount() {
 		return productAmount;
 	}
@@ -77,5 +73,15 @@ public class InvoiceProducts {
 	public void setProductAmount(int productAmount) {
 		this.productAmount = productAmount;
 	}
+
+	public UUID getInvoiceId() {
+		return invoiceId;
+	}
+
+	public void setInvoiceId(UUID invoiceId) {
+		this.invoiceId = invoiceId;
+	}
+	
+	
 
 }
