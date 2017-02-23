@@ -15,7 +15,7 @@ import org.hibernate.annotations.Type;
 
 @Entity
 @Table(indexes = {
-		@Index(name = "personal_id_index", columnList = "personal_id", unique = true)
+		@Index(name = "personal_id_index", columnList = "personalId", unique = true)
 		})
 public class Customer {
 	
@@ -26,31 +26,17 @@ public class Customer {
 	@Id
 	@Type(type="org.hibernate.type.PostgresUUIDType")
 	private UUID id;
-	
-	@Column(name="first_name")
 	private String firstName;
-	
-	@Column(name="last_name")
 	private String lastName;
-	
-	@Column(name="personal_id")
 	private String personalId;
-	
 	private boolean employee;
 	
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date birthdate;
 	
-	@Column(name="marital_status")
 	private String maritalStatus;
-	
-	@Column(name="employee_discount")
 	private int employeeDiscount;
-	
-	@Column(name="phone_number")
 	private String phoneNumber;
-	
-	@Column(name="mobile_number")
 	private String mobileNumber;
 	
 	public UUID getId() {

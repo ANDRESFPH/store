@@ -20,8 +20,6 @@ public class Product {
 	private UUID id;
 	
 	private String name;
-	
-	@Column(name = "unit_cost")
 	private double unitCost;
 
 	public UUID getId() {

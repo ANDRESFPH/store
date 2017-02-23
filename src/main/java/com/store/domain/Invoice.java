@@ -1,15 +1,12 @@
 package com.store.domain;
 
 import java.util.Date;
-import java.util.List;
 import java.util.UUID;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Index;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -18,7 +15,6 @@ import org.hibernate.annotations.Type;
 
 @Entity
 @Table(indexes = {
-		@Index(columnList = "invoice_number", name = "invoice_number_index", unique = true),
 		@Index(columnList = "purchase_date", name = "purchase_date_index", unique = false)
 		})
 public class Invoice {
@@ -27,28 +23,15 @@ public class Invoice {
 		this.id = UUID.randomUUID();
 	}
 	
-	@OneToMany
-	@JoinColumn(name = "invoice_id")
-	private List<InvoiceProducts> products;
-	
 	@Id
 	@Type(type="org.hibernate.type.PostgresUUIDType")
 	private UUID id;
-	
-	@Column(name="invoice_number")
-	private String invoiceNumber;
-	
-	@Column(name="discount_percentage")
 	private int discountPercentage;
 	
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="purchase_date")
 	private Date purchaseDate;
-	
-	@Column(name="total_cost")
 	private double totalCost;
-	
-	@Column(name="tax_percentage")
 	private int taxPercentage;
 
 	public UUID getId() {
@@ -57,14 +40,6 @@ public class Invoice {
 
 	public void setId(UUID id) {
 		this.id = id;
-	}
-
-	public String getInvoiceNumber() {
-		return invoiceNumber;
-	}
-
-	public void setInvoiceNumber(String invoiceNumber) {
-		this.invoiceNumber = invoiceNumber;
 	}
 
 	public int getDiscountPercentage() {

@@ -14,7 +14,8 @@ import org.hibernate.annotations.Type;
 
 @Entity
 @Table(indexes = {
-		@Index(columnList = "invoice_id", name = "invoice_id_index", unique = false)
+		@Index(columnList = "invoice_id", name = "invoice_id_index", unique = false),
+		@Index(columnList = "product_id", name = "product_id_index", unique = false)
 		})
 public class InvoiceProducts {
 	
@@ -23,24 +24,21 @@ public class InvoiceProducts {
 	}
 	
 	@ManyToOne
-	@JoinColumn(name = "id", insertable = false, updatable = false)
+	@JoinColumn(name = "product_id", insertable = false, updatable = false)
 	private Product product;
+	
+	@ManyToOne
+	@JoinColumn(name = "invoice_id")
+	private Invoice invoice;
+	
 	
 	@Id
 	@Type(type="org.hibernate.type.PostgresUUIDType")
 	private UUID id;
 	
-	@Column(name = "product_name")
 	private String productName;
-	
-	@Column(name = "product_price")
 	private double productPrice;
-	
-	@Column(name = "product_amount")
 	private int productAmount;
-	
-	@Column(name = "invoice_id")
-	private UUID invoiceId;
 
 	public UUID getId() {
 		return id;
@@ -73,15 +71,5 @@ public class InvoiceProducts {
 	public void setProductAmount(int productAmount) {
 		this.productAmount = productAmount;
 	}
-
-	public UUID getInvoiceId() {
-		return invoiceId;
-	}
-
-	public void setInvoiceId(UUID invoiceId) {
-		this.invoiceId = invoiceId;
-	}
-	
-	
 
 }
